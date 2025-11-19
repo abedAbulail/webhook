@@ -33,7 +33,7 @@ async def stripe_webhook(request: Request):
 
     if event["type"] == "checkout.session.completed":
         session = event["data"]["object"]
-
+        print(session)
         stripe_session_id = session.get("id")
         email = session.get("customer_email")
         metadata = session.get("metadata", {})
@@ -56,3 +56,4 @@ async def stripe_webhook(request: Request):
             print("❌ Supabase insert error:", e)
 
     return {"status": "ok"}
+
